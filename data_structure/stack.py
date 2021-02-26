@@ -35,9 +35,11 @@ class Stack:
 
     def pop(self):
         self.__empty_check()
+        top = self.__root.data
         self.__root = self.__root.next
 
         self.__decrease_length()
+        return top
 
     def top(self):
         self.__empty_check()
@@ -45,3 +47,9 @@ class Stack:
 
     def size(self):
         return self.__length
+
+    def show(self):
+        temp = self.__root
+        while temp:
+            print(temp.data)
+            temp = temp.next
