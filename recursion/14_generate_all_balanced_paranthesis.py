@@ -9,6 +9,6 @@ def generate_all_balanced_paranthesis(output, open, close):
 
 
 if __name__ == "__main__":
-    n = 3
+    n = open = close = 3
     output = ''
-    generate_all_balanced_paranthesis(output, open=n, close=n)
+    generate_all_balanced_paranthesis(output, open, close)
