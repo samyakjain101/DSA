@@ -7,7 +7,7 @@ def equal_sum_partition(arr, n, sum):
 
     for i in range(1, n+1):
         for j in range(1, sum+1):
-            if sum >= arr[i-1]:
+            if j >= arr[i-1]:
                 dp[i][j] = (
                     dp[i-1][j-arr[i-1]] or dp[i-1][j])
             else:
@@ -17,7 +17,7 @@ def equal_sum_partition(arr, n, sum):
 
 
 if __name__ == "__main__":
-    arr = [1, 5, 11, 5]
+    arr = [5, 5, 5, 6]
     n = len(arr)
     sum = sum(arr)
 
