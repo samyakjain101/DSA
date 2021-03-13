@@ -9,9 +9,12 @@ def lcs(string1, string2, n1, n2):
         dp[n1][n2] = lcs(string1, string2, n1-1, n2-1) + string1[n1-1]
         return dp[n1][n2]
     else:
-        dp[n1][n2] = max(
-            lcs(string1, string2, n1-1, n2),
-            lcs(string1, string2, n1, n2-1))
+        choice1 = lcs(string1, string2, n1-1, n2)
+        choice2 = lcs(string1, string2, n1, n2-1)
+        dp[n1][n2] = (
+            choice1 if
+            len(choice1) > len(choice2)
+            else choice2)
         return dp[n1][n2]
 
 
