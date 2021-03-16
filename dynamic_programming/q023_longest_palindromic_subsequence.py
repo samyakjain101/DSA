@@ -1,4 +1,4 @@
-from q_longest_common_subsequence_bottom_up import lcs
+from q016_longest_common_subsequence_bottom_up import lcs
 
 
 if __name__ == "__main__":
