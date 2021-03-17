@@ -7,8 +7,19 @@ def mcm(matrix, i, j):
 
     mini = float('inf')
     for k in range(i, j):
-        temp_ans = (mcm(matrix, i, k) +
-                    mcm(matrix, k+1, j) +
+
+        if dp[i][k] != -1:
+            left = dp[i][k]
+        else:
+            left = mcm(matrix, i, k)
+
+        if dp[k+1][j] != -1:
+            right = dp[k+1][j]
+        else:
+            right = mcm(matrix, k+1, j)
+
+        temp_ans = (left +
+                    right +
                     matrix[i-1]*matrix[k]*matrix[j])
         mini = min(temp_ans, mini)
 
