@@ -6,5 +6,4 @@ if __name__ == "__main__":
     string2 = "ADXCPY"
     n, m = len(string1), len(string2)
 
-    # Method-1 using LCS
     print(lcs(string1, string2, n, m) == min(n, m))
