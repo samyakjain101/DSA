@@ -16,11 +16,13 @@ def solve(string, i, j):
             left = dp[i][k]
         else:
             left = solve(string, i, k)
+            dp[i][k] = left
 
         if dp[k+1][j] != -1:
             right = dp[k+1][j]
         else:
             right = solve(string, k+1, j)
+            dp[k+1][j] = right
 
         temp_ans = left + right + 1
         mini = min(mini, temp_ans)
