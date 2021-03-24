@@ -1,5 +1,4 @@
 """Problem statement
-
 https://www.pepcoding.com/resources/data-structures-and-algorithms-in-java-levelup/bit-manipulation/kernighans-algo-official/ojquestion
 """
 
