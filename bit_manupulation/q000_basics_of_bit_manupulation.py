@@ -1,5 +1,5 @@
-"""
-Problem statement:
+"""Problem statement
+
 https://www.pepcoding.com/resources/data-structures-and-algorithms-in-java-levelup/bit-manipulation/basics-of-bit-official/ojquestion
 """
 
