@@ -1,5 +1,5 @@
 """Problem Statement
-https://leetcode.com/problems/single-number-ii/
+https://practice.geeksforgeeks.org/problems/bit-difference-1587115620/1
 """
 from q002_kernighans_algo import kernighans
 
