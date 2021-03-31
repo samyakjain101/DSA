@@ -4,9 +4,6 @@ https://leetcode.com/problems/sudoku-solver/
 from typing import List
 
 
-result = []
-
-
 class Solution:
 
     def solve(self, n, i, cols, diagonals, diagonals_reverse, board, answer) -> None:
