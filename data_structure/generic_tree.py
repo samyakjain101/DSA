@@ -163,14 +163,49 @@ class GenericTree:
 
         node.childrens = new_childrens
 
+    def remove_leaves_without_using_extra_space(self, node=None):
+        if node is None:
+            node = self.root
+
+        i = len(node.childrens) - 1
+        while i >= 0:
+            child = node.childrens[i]
+            if child.childrens:
+                self.remove_leaves_without_using_extra_space(node=child)
+            else:
+                node.childrens.pop(i)
+            i -= 1
+
 
 if __name__ == "__main__":
-    # tree_euler = [
-    #     10, 20, 50, -1, 60, -1, -1, 30,
-    #     70, -1, 80, 110, -1, 120, -1, -1,
-    #     90, -1, -1, 40, 100, -1, -1, -1]
+    tree_euler = [
+        10,
+        20,
+        50,
+        -1,
+        60,
+        -1,
+        -1,
+        30,
+        70,
+        -1,
+        80,
+        110,
+        -1,
+        120,
+        -1,
+        -1,
+        90,
+        -1,
+        -1,
+        40,
+        100,
+        -1,
+        -1,
+        -1,
+    ]
 
-    tree_euler = [10, 20, -1, 30, 50, -1, 60, -1, -1, 40, -1, -1]
+    # tree_euler = [10, 20, -1, 30, 50, -1, 60, -1, -1, 40, -1, -1]
     tree = GenericTree(tree_euler)
     tree.display()
     # print(f'Total nodes: {tree.total_nodes()}')
@@ -184,5 +219,6 @@ if __name__ == "__main__":
     # tree.level_order_zig_zag()
     # tree.mirror_tree()
     # tree.mirror_recursive()
-    tree.remove_leaves()
+    # tree.remove_leaves()
+    tree.remove_leaves_without_using_extra_space()
     tree.display()
