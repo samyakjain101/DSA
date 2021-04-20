@@ -197,6 +197,24 @@ class GenericTree:
             second_last_tail = self.__get_tail(second_last)
             second_last_tail.childrens = [last_child]
 
+    def linearize_tree_optimized(self, node=None):
+        if node is None:
+            node = self.root
+
+        if not node.childrens:
+            return node
+
+        last_child_tail = self.linearize_tree_optimized(node=node.childrens[-1])
+        while len(node.childrens) > 1:
+            last_child = node.childrens.pop()
+            second_last_child = node.childrens[-1]
+            second_last_child_tail = self.linearize_tree_optimized(
+                node=second_last_child
+            )
+            second_last_child_tail.childrens = [last_child]
+
+        return last_child_tail
+
 
 if __name__ == "__main__":
     # tree_euler = [
@@ -242,5 +260,6 @@ if __name__ == "__main__":
     # tree.mirror_recursive()
     # tree.remove_leaves()
     # tree.remove_leaves_without_using_extra_space()
-    tree.linearize_tree()
+    # tree.linearize_tree()
+    tree.linearize_tree_optimized()
     tree.display()
