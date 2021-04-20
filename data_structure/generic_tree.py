@@ -228,36 +228,51 @@ class GenericTree:
 
         return False
 
+    def node_to_root_path(self, data, node=None):
+        if node is None:
+            node = self.root
+
+        if node.data == data:
+            return [node.data]
+
+        for child in node.childrens:
+            result = self.node_to_root_path(data, child)
+            if result:
+                result.append(node.data)
+                return result
+
+        return []
+
 
 if __name__ == "__main__":
-    # tree_euler = [
-    #     10,
-    #     20,
-    #     50,
-    #     -1,
-    #     60,
-    #     -1,
-    #     -1,
-    #     30,
-    #     70,
-    #     -1,
-    #     80,
-    #     110,
-    #     -1,
-    #     120,
-    #     -1,
-    #     -1,
-    #     90,
-    #     -1,
-    #     -1,
-    #     40,
-    #     100,
-    #     -1,
-    #     -1,
-    #     -1,
-    # ]
+    tree_euler = [
+        10,
+        20,
+        50,
+        -1,
+        60,
+        -1,
+        -1,
+        30,
+        70,
+        -1,
+        80,
+        110,
+        -1,
+        120,
+        -1,
+        -1,
+        90,
+        -1,
+        -1,
+        40,
+        100,
+        -1,
+        -1,
+        -1,
+    ]
 
-    tree_euler = [10, 20, -1, 30, 50, -1, 60, -1, -1, 40, -1, -1]
+    # tree_euler = [10, 20, -1, 30, 50, -1, 60, -1, -1, 40, -1, -1]
     tree = GenericTree(tree_euler)
     tree.display()
     # print(f'Total nodes: {tree.total_nodes()}')
@@ -276,5 +291,4 @@ if __name__ == "__main__":
     # tree.linearize_tree()
     # tree.linearize_tree_optimized()
     # tree.display()
-    print(tree.find_element(40))
-    print(tree.find_element(20))
+    print(tree.node_to_root_path(0))
