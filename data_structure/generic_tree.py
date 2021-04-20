@@ -176,36 +176,57 @@ class GenericTree:
                 node.childrens.pop(i)
             i -= 1
 
+    @staticmethod
+    def __get_tail(node):
+        tail = node
+        while tail.childrens:
+            tail = tail.childrens[0]
+
+        return tail
+
+    def linearize_tree(self, node=None):
+        if node is None:
+            node = self.root
+
+        for child in node.childrens:
+            self.linearize_tree(node=child)
+
+        while len(node.childrens) > 1:
+            last_child = node.childrens.pop()
+            second_last = node.childrens[-1]
+            second_last_tail = self.__get_tail(second_last)
+            second_last_tail.childrens = [last_child]
+
 
 if __name__ == "__main__":
-    tree_euler = [
-        10,
-        20,
-        50,
-        -1,
-        60,
-        -1,
-        -1,
-        30,
-        70,
-        -1,
-        80,
-        110,
-        -1,
-        120,
-        -1,
-        -1,
-        90,
-        -1,
-        -1,
-        40,
-        100,
-        -1,
-        -1,
-        -1,
-    ]
+    # tree_euler = [
+    #     10,
+    #     20,
+    #     50,
+    #     -1,
+    #     60,
+    #     -1,
+    #     -1,
+    #     30,
+    #     70,
+    #     -1,
+    #     80,
+    #     110,
+    #     -1,
+    #     120,
+    #     -1,
+    #     -1,
+    #     90,
+    #     -1,
+    #     -1,
+    #     40,
+    #     100,
+    #     -1,
+    #     -1,
+    #     -1,
+    # ]
 
-    # tree_euler = [10, 20, -1, 30, 50, -1, 60, -1, -1, 40, -1, -1]
+    tree_euler = [10, 20, -1, 30, 50, -1, 60, -1, -1, 40, -1, -1]
     tree = GenericTree(tree_euler)
     tree.display()
     # print(f'Total nodes: {tree.total_nodes()}')
@@ -220,5 +241,6 @@ if __name__ == "__main__":
     # tree.mirror_tree()
     # tree.mirror_recursive()
     # tree.remove_leaves()
-    tree.remove_leaves_without_using_extra_space()
+    # tree.remove_leaves_without_using_extra_space()
+    tree.linearize_tree()
     tree.display()
