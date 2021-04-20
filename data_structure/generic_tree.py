@@ -215,6 +215,19 @@ class GenericTree:
 
         return last_child_tail
 
+    def find_element(self, data, node=None):
+        if node is None:
+            node = self.root
+
+        if node.data == data:
+            return True
+
+        for child in node.childrens:
+            if self.find_element(data, child):
+                return True
+
+        return False
+
 
 if __name__ == "__main__":
     # tree_euler = [
@@ -261,5 +274,7 @@ if __name__ == "__main__":
     # tree.remove_leaves()
     # tree.remove_leaves_without_using_extra_space()
     # tree.linearize_tree()
-    tree.linearize_tree_optimized()
-    tree.display()
+    # tree.linearize_tree_optimized()
+    # tree.display()
+    print(tree.find_element(40))
+    print(tree.find_element(20))
