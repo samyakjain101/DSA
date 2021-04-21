@@ -278,6 +278,18 @@ def similar_in_shape(root1, root2):
     return True
 
 
+def mirror_in_shape(root1, root2):
+    n1, n2 = len(root1.childrens), len(root2.childrens)
+    if n1 == n2:
+        for i in range(n1):
+            if not similar_in_shape(root1.childrens[i], root2.childrens[n1 - i - 1]):
+                return False
+    else:
+        return False
+
+    return True
+
+
 if __name__ == "__main__":
     tree_euler = [
         10,
@@ -328,5 +340,33 @@ if __name__ == "__main__":
     # print(tree.node_to_root_path(0))
     # print(tree.lowest_common_ancestor(70, 110))
     # print(tree.distance_between_nodes(70, 110))
-    tree2 = GenericTree(tree_euler)
-    print(similar_in_shape(tree.root, tree2.root))
+    # tree2 = GenericTree(tree_euler)
+    # print(similar_in_shape(tree.root, tree2.root))
+    mirror_euler = [
+        10,
+        40,
+        100,
+        -1,
+        -1,
+        30,
+        90,
+        -1,
+        80,
+        120,
+        -1,
+        110,
+        -1,
+        -1,
+        70,
+        -1,
+        -1,
+        20,
+        60,
+        -1,
+        80,
+        -1,
+        -1,
+        -1,
+    ]
+    mirror_tree = GenericTree(mirror_euler)
+    print(mirror_in_shape(tree.root, mirror_tree.root))
