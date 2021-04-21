@@ -266,6 +266,18 @@ class GenericTree:
         return i + 1 + j + 1
 
 
+def similar_in_shape(root1, root2):
+    n1, n2 = len(root1.childrens), len(root2.childrens)
+    if n1 == n2:
+        for i in range(n1):
+            if not similar_in_shape(root1.childrens[i], root2.childrens[i]):
+                return False
+    else:
+        return False
+
+    return True
+
+
 if __name__ == "__main__":
     tree_euler = [
         10,
@@ -296,7 +308,7 @@ if __name__ == "__main__":
 
     # tree_euler = [10, 20, -1, 30, 50, -1, 60, -1, -1, 40, -1, -1]
     tree = GenericTree(tree_euler)
-    tree.display()
+    # tree.display()
     # print(f'Total nodes: {tree.total_nodes()}')
     # print(f'Maximum in tree: {tree.maximum()}')
     # print(f'Height of tree: {tree.height()}')
@@ -315,4 +327,6 @@ if __name__ == "__main__":
     # tree.display()
     # print(tree.node_to_root_path(0))
     # print(tree.lowest_common_ancestor(70, 110))
-    print(tree.distance_between_nodes(70, 110))
+    # print(tree.distance_between_nodes(70, 110))
+    tree2 = GenericTree(tree_euler)
+    print(similar_in_shape(tree.root, tree2.root))
