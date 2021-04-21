@@ -254,6 +254,17 @@ class GenericTree:
 
         return path1[i + 1]
 
+    def distance_between_nodes(self, data1, data2):
+        path1 = self.node_to_root_path(data1)
+        path2 = self.node_to_root_path(data2)
+
+        i, j = len(path1) - 1, len(path2) - 1
+        while i >= 0 and j >= 0 and path1[i] == path2[j]:
+            i -= 1
+            j -= 1
+
+        return i + 1 + j + 1
+
 
 if __name__ == "__main__":
     tree_euler = [
@@ -303,4 +314,5 @@ if __name__ == "__main__":
     # tree.linearize_tree_optimized()
     # tree.display()
     # print(tree.node_to_root_path(0))
-    print(tree.lowest_common_ancestor(70, 110))
+    # print(tree.lowest_common_ancestor(70, 110))
+    print(tree.distance_between_nodes(70, 110))
