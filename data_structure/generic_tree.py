@@ -265,6 +265,13 @@ class GenericTree:
 
         return i + 1 + j + 1
 
+    def is_symmetic(self, node=None):
+        """Symmetric tree is mirror image of itself."""
+        if node is None:
+            node = self.root
+
+        return mirror_in_shape(node, node)
+
 
 def similar_in_shape(root1, root2):
     n1, n2 = len(root1.childrens), len(root2.childrens)
@@ -291,34 +298,34 @@ def mirror_in_shape(root1, root2):
 
 
 if __name__ == "__main__":
-    tree_euler = [
-        10,
-        20,
-        50,
-        -1,
-        60,
-        -1,
-        -1,
-        30,
-        70,
-        -1,
-        80,
-        110,
-        -1,
-        120,
-        -1,
-        -1,
-        90,
-        -1,
-        -1,
-        40,
-        100,
-        -1,
-        -1,
-        -1,
-    ]
+    # tree_euler = [
+    #     10,
+    #     20,
+    #     50,
+    #     -1,
+    #     60,
+    #     -1,
+    #     -1,
+    #     30,
+    #     70,
+    #     -1,
+    #     80,
+    #     110,
+    #     -1,
+    #     120,
+    #     -1,
+    #     -1,
+    #     90,
+    #     -1,
+    #     -1,
+    #     40,
+    #     100,
+    #     -1,
+    #     -1,
+    #     -1,
+    # ]
 
-    # tree_euler = [10, 20, -1, 30, 50, -1, 60, -1, -1, 40, -1, -1]
+    tree_euler = [10, 20, -1, 30, 50, -1, 60, -1, -1, 40, -1, -1]
     tree = GenericTree(tree_euler)
     # tree.display()
     # print(f'Total nodes: {tree.total_nodes()}')
@@ -342,31 +349,32 @@ if __name__ == "__main__":
     # print(tree.distance_between_nodes(70, 110))
     # tree2 = GenericTree(tree_euler)
     # print(similar_in_shape(tree.root, tree2.root))
-    mirror_euler = [
-        10,
-        40,
-        100,
-        -1,
-        -1,
-        30,
-        90,
-        -1,
-        80,
-        120,
-        -1,
-        110,
-        -1,
-        -1,
-        70,
-        -1,
-        -1,
-        20,
-        60,
-        -1,
-        80,
-        -1,
-        -1,
-        -1,
-    ]
-    mirror_tree = GenericTree(mirror_euler)
-    print(mirror_in_shape(tree.root, mirror_tree.root))
+    # mirror_euler = [
+    #     10,
+    #     40,
+    #     100,
+    #     -1,
+    #     -1,
+    #     30,
+    #     90,
+    #     -1,
+    #     80,
+    #     120,
+    #     -1,
+    #     110,
+    #     -1,
+    #     -1,
+    #     70,
+    #     -1,
+    #     -1,
+    #     20,
+    #     60,
+    #     -1,
+    #     80,
+    #     -1,
+    #     -1,
+    #     -1,
+    # ]
+    # mirror_tree = GenericTree(mirror_euler)
+    # print(mirror_in_shape(tree.root, mirror_tree.root))
+    print(tree.is_symmetic())
