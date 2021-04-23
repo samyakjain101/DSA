@@ -272,6 +272,23 @@ class GenericTree:
 
         return mirror_in_shape(node, node)
 
+    max_value = float("-inf")
+    min_value = float("inf")
+    height_tree = 0
+    size_tree = 0
+
+    def multisolver(self, node=None, depth=0):
+        if node is None:
+            node = self.root
+
+        self.max_value = max(self.max_value, node.data)
+        self.min_value = min(self.min_value, node.data)
+        self.size_tree += 1
+        self.height_tree = max(self.height_tree, depth)
+
+        for child in node.childrens:
+            self.multisolver(node=child, depth=depth + 1)
+
 
 def similar_in_shape(root1, root2):
     n1, n2 = len(root1.childrens), len(root2.childrens)
@@ -377,4 +394,13 @@ if __name__ == "__main__":
     # ]
     # mirror_tree = GenericTree(mirror_euler)
     # print(mirror_in_shape(tree.root, mirror_tree.root))
-    print(tree.is_symmetic())
+    # print(tree.is_symmetic())
+    tree.multisolver()
+    print(
+        {
+            "max": tree.max_value,
+            "min": tree.min_value,
+            "size": tree.size_tree,
+            "height": tree.height_tree,
+        }
+    )
