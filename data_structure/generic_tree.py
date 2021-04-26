@@ -325,16 +325,16 @@ class GenericTree:
             self.ceil_and_floor(data, node=child)
 
     def k_th_largest(self, k):
-        get_floor_of = float('inf')
+        get_floor_of = float("inf")
         for i in range(k):
             self.ceil_and_floor(data=get_floor_of)
             get_floor_of = self.floor
-            self.floor = float('-inf')
+            self.floor = float("-inf")
 
         return get_floor_of
 
     max_subtree_sum_node = None
-    max_subtree_sum = float('-inf')
+    max_subtree_sum = float("-inf")
 
     def node_with_max_subtree_sum(self, node=None):
         if node is None:
@@ -472,7 +472,9 @@ if __name__ == "__main__":
     # print({"ceil": tree.ceil, "floor": tree.floor})
     # print(tree.k_th_largest(3))
     print(tree.node_with_max_subtree_sum())
-    print({
-        "node with max subtree sum": tree.max_subtree_sum_node,
-        "subtree max sum": tree.max_subtree_sum
-    })
+    print(
+        {
+            "node with max subtree sum": tree.max_subtree_sum_node,
+            "subtree max sum": tree.max_subtree_sum,
+        }
+    )
