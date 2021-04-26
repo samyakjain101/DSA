@@ -309,6 +309,21 @@ class GenericTree:
         for child in node.childrens:
             self.predecessor_and_successor(data=data, node=child)
 
+    ceil = float("inf")
+    floor = float("-inf")
+
+    def ceil_and_floor(self, data, node=None):
+        if node is None:
+            node = self.root
+
+        if data < node.data < self.ceil:
+            self.ceil = node.data
+        if data > node.data > self.floor:
+            self.floor = node.data
+
+        for child in node.childrens:
+            self.ceil_and_floor(data, node=child)
+
 
 def similar_in_shape(root1, root2):
     n1, n2 = len(root1.childrens), len(root2.childrens)
@@ -424,8 +439,7 @@ if __name__ == "__main__":
     #         "height": tree.height_tree,
     #     }
     # )
-    tree.predecessor_and_successor(50)
-    print({
-        "predecessor": tree.predecessor,
-        "successor": tree.successor
-    })
+    # tree.predecessor_and_successor(50)
+    # print({"predecessor": tree.predecessor, "successor": tree.successor})
+    tree.ceil_and_floor(data=50)
+    print({"ceil": tree.ceil, "floor": tree.floor})
