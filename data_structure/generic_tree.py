@@ -351,6 +351,30 @@ class GenericTree:
 
         return subtree_sum
 
+    diameter = 0
+
+    def calculate_diameter_return_height(self, node=None):
+        if node is None:
+            node = self.root
+
+        deepest_child_height = 0
+        second_deepest_child_height = 0
+
+        for child in node.childrens:
+            height = 1 + self.calculate_diameter_return_height(node=child)
+
+            if height > deepest_child_height:
+                second_deepest_child_height = deepest_child_height
+                deepest_child_height = height
+            elif height > second_deepest_child_height:
+                second_deepest_child_height = height
+
+        temp_diameter = deepest_child_height + second_deepest_child_height
+        if temp_diameter > self.diameter:
+            self.diameter = temp_diameter
+
+        return deepest_child_height
+
 
 def similar_in_shape(root1, root2):
     n1, n2 = len(root1.childrens), len(root2.childrens)
@@ -471,10 +495,12 @@ if __name__ == "__main__":
     # tree.ceil_and_floor(data=50)
     # print({"ceil": tree.ceil, "floor": tree.floor})
     # print(tree.k_th_largest(3))
-    print(tree.node_with_max_subtree_sum())
-    print(
-        {
-            "node with max subtree sum": tree.max_subtree_sum_node,
-            "subtree max sum": tree.max_subtree_sum,
-        }
-    )
+    # print(tree.node_with_max_subtree_sum())
+    # print(
+    #     {
+    #         "node with max subtree sum": tree.max_subtree_sum_node,
+    #         "subtree max sum": tree.max_subtree_sum,
+    #     }
+    # )
+    print(tree.calculate_diameter_return_height())
+    print(f'Diameter: {tree.diameter}')
