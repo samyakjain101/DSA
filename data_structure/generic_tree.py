@@ -333,6 +333,24 @@ class GenericTree:
 
         return get_floor_of
 
+    max_subtree_sum_node = None
+    max_subtree_sum = float('-inf')
+
+    def node_with_max_subtree_sum(self, node=None):
+        if node is None:
+            node = self.root
+
+        subtree_sum = node.data
+
+        for child in node.childrens:
+            subtree_sum += self.node_with_max_subtree_sum(node=child)
+
+        if subtree_sum > self.max_subtree_sum:
+            self.max_subtree_sum = subtree_sum
+            self.max_subtree_sum_node = node.data
+
+        return subtree_sum
+
 
 def similar_in_shape(root1, root2):
     n1, n2 = len(root1.childrens), len(root2.childrens)
@@ -359,34 +377,34 @@ def mirror_in_shape(root1, root2):
 
 
 if __name__ == "__main__":
-    tree_euler = [
-        10,
-        20,
-        50,
-        -1,
-        60,
-        -1,
-        -1,
-        30,
-        70,
-        -1,
-        80,
-        110,
-        -1,
-        120,
-        -1,
-        -1,
-        90,
-        -1,
-        -1,
-        40,
-        100,
-        -1,
-        -1,
-        -1,
-    ]
+    # tree_euler = [
+    #     10,
+    #     20,
+    #     50,
+    #     -1,
+    #     60,
+    #     -1,
+    #     -1,
+    #     30,
+    #     70,
+    #     -1,
+    #     80,
+    #     110,
+    #     -1,
+    #     120,
+    #     -1,
+    #     -1,
+    #     90,
+    #     -1,
+    #     -1,
+    #     40,
+    #     100,
+    #     -1,
+    #     -1,
+    #     -1,
+    # ]
 
-    # tree_euler = [10, 20, -1, 30, 50, -1, 60, -1, -1, 40, -1, -1]
+    tree_euler = [10, 20, -1, 30, 50, -1, 60, -1, -1, 40, -1, -1]
     tree = GenericTree(tree_euler)
     # tree.display()
     # print(f'Total nodes: {tree.total_nodes()}')
@@ -452,4 +470,9 @@ if __name__ == "__main__":
     # print({"predecessor": tree.predecessor, "successor": tree.successor})
     # tree.ceil_and_floor(data=50)
     # print({"ceil": tree.ceil, "floor": tree.floor})
-    print(tree.k_th_largest(3))
+    # print(tree.k_th_largest(3))
+    print(tree.node_with_max_subtree_sum())
+    print({
+        "node with max subtree sum": tree.max_subtree_sum_node,
+        "subtree max sum": tree.max_subtree_sum
+    })
