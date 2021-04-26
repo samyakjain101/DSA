@@ -289,6 +289,26 @@ class GenericTree:
         for child in node.childrens:
             self.multisolver(node=child, depth=depth + 1)
 
+    predecessor = None
+    successor = None
+    state = 0
+
+    def predecessor_and_successor(self, data, node=None):
+        if node is None:
+            node = self.root
+
+        if self.state == 0:
+            if node.data == data:
+                self.state = 1
+            else:
+                self.predecessor = node.data
+        elif self.state == 1:
+            self.successor = node.data
+            self.state = 2
+
+        for child in node.childrens:
+            self.predecessor_and_successor(data=data, node=child)
+
 
 def similar_in_shape(root1, root2):
     n1, n2 = len(root1.childrens), len(root2.childrens)
@@ -395,12 +415,17 @@ if __name__ == "__main__":
     # mirror_tree = GenericTree(mirror_euler)
     # print(mirror_in_shape(tree.root, mirror_tree.root))
     # print(tree.is_symmetic())
-    tree.multisolver()
-    print(
-        {
-            "max": tree.max_value,
-            "min": tree.min_value,
-            "size": tree.size_tree,
-            "height": tree.height_tree,
-        }
-    )
+    # tree.multisolver()
+    # print(
+    #     {
+    #         "max": tree.max_value,
+    #         "min": tree.min_value,
+    #         "size": tree.size_tree,
+    #         "height": tree.height_tree,
+    #     }
+    # )
+    tree.predecessor_and_successor(50)
+    print({
+        "predecessor": tree.predecessor,
+        "successor": tree.successor
+    })
