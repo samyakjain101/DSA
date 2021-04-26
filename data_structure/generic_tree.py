@@ -324,6 +324,15 @@ class GenericTree:
         for child in node.childrens:
             self.ceil_and_floor(data, node=child)
 
+    def k_th_largest(self, k):
+        get_floor_of = float('inf')
+        for i in range(k):
+            self.ceil_and_floor(data=get_floor_of)
+            get_floor_of = self.floor
+            self.floor = float('-inf')
+
+        return get_floor_of
+
 
 def similar_in_shape(root1, root2):
     n1, n2 = len(root1.childrens), len(root2.childrens)
@@ -350,34 +359,34 @@ def mirror_in_shape(root1, root2):
 
 
 if __name__ == "__main__":
-    # tree_euler = [
-    #     10,
-    #     20,
-    #     50,
-    #     -1,
-    #     60,
-    #     -1,
-    #     -1,
-    #     30,
-    #     70,
-    #     -1,
-    #     80,
-    #     110,
-    #     -1,
-    #     120,
-    #     -1,
-    #     -1,
-    #     90,
-    #     -1,
-    #     -1,
-    #     40,
-    #     100,
-    #     -1,
-    #     -1,
-    #     -1,
-    # ]
+    tree_euler = [
+        10,
+        20,
+        50,
+        -1,
+        60,
+        -1,
+        -1,
+        30,
+        70,
+        -1,
+        80,
+        110,
+        -1,
+        120,
+        -1,
+        -1,
+        90,
+        -1,
+        -1,
+        40,
+        100,
+        -1,
+        -1,
+        -1,
+    ]
 
-    tree_euler = [10, 20, -1, 30, 50, -1, 60, -1, -1, 40, -1, -1]
+    # tree_euler = [10, 20, -1, 30, 50, -1, 60, -1, -1, 40, -1, -1]
     tree = GenericTree(tree_euler)
     # tree.display()
     # print(f'Total nodes: {tree.total_nodes()}')
@@ -441,5 +450,6 @@ if __name__ == "__main__":
     # )
     # tree.predecessor_and_successor(50)
     # print({"predecessor": tree.predecessor, "successor": tree.successor})
-    tree.ceil_and_floor(data=50)
-    print({"ceil": tree.ceil, "floor": tree.floor})
+    # tree.ceil_and_floor(data=50)
+    # print({"ceil": tree.ceil, "floor": tree.floor})
+    print(tree.k_th_largest(3))
