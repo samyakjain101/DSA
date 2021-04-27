@@ -375,6 +375,37 @@ class GenericTree:
 
         return deepest_child_height
 
+    def preorder_postorder_iterative(self, node=None):
+        if node is None:
+            node = self.root
+
+        preorder = []
+        postorder = []
+
+        stack = [[node, -1]]
+
+        while stack:
+            childrens = stack[-1][0].childrens
+            state = stack[-1][1]
+
+            if state == -1:
+                # preorder
+                preorder.append(stack[-1][0].data)
+                stack[-1][1] = 0
+
+            elif state < len(childrens):
+                # Push child to stack
+                child = childrens[state]
+                stack[-1][1] += 1
+                stack.append([child, -1])
+
+            else:
+                # postorder
+                post = stack.pop()
+                postorder.append(post[0].data)
+
+        return preorder, postorder
+
 
 def similar_in_shape(root1, root2):
     n1, n2 = len(root1.childrens), len(root2.childrens)
@@ -502,5 +533,6 @@ if __name__ == "__main__":
     #         "subtree max sum": tree.max_subtree_sum,
     #     }
     # )
-    print(tree.calculate_diameter_return_height())
-    print(f'Diameter: {tree.diameter}')
+    # print(tree.calculate_diameter_return_height())
+    # print(f'Diameter: {tree.diameter}')
+    print(tree.preorder_postorder_iterative())
