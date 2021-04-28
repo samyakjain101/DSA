@@ -53,6 +53,25 @@ class Graph:
 
         return False
 
+    def allPath(self, source: int, destination: int) -> None:
+        visited = [False] * len(self.graph)
+        return self.__allPath(source, destination, visited, "")
+
+    def __allPath(self, source: int, destination: int, visited: list, path: str):
+        if source == destination:
+            path += str(destination)
+            print(path)
+            return
+
+        if not visited[source]:
+            visited[source] = True
+            path += str(source)
+
+            for edge in self.graph[source]:
+                self.__allPath(edge.neighbour, destination, visited, path)
+
+            visited[source] = False
+
 
 if __name__ == "__main__":
     g = Graph(
@@ -67,4 +86,4 @@ if __name__ == "__main__":
             [4, 6, 10],
         ]
     )
-    print(g.hasPath(0, 6))
+    g.allPath(0, 6)
