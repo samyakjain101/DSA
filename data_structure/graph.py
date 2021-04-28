@@ -72,6 +72,68 @@ class Graph:
 
             visited[source] = False
 
+    def multisolver(self, source: int, destination: int, criteria: int, k: int):
+        visited = [False] * len(self.graph)
+        return self.__multisolver(source, destination, visited, "", 0, criteria, k)
+
+    smallest_path = None
+    smallest_path_weight = float("inf")
+    longest_path = None
+    longest_path_weight = float("-inf")
+
+    just_larger_path = None
+    just_larger_path_weight = float('inf')
+    just_smaller_path = None
+    just_smaller_path_weight = float('-inf')
+
+    def __multisolver(
+        self,
+        source: int,
+        desination: int,
+        visited: list,
+        path: str,
+        weight: int,
+        criteria: int,
+        k: int,
+    ):
+        if source == desination:
+            path += str(desination)
+
+            if weight < self.smallest_path_weight:
+                self.smallest_path = path
+                self.smallest_path_weight = weight
+
+            if weight > self.longest_path_weight:
+                self.longest_path = path
+                self.longest_path_weight = weight
+
+            if criteria < weight < self.just_larger_path_weight:
+                self.just_larger_path = path
+                self.just_larger_path_weight = weight
+
+            if criteria > weight > self.just_smaller_path_weight:
+                self.just_smaller_path = path
+                self.just_smaller_path_weight = weight
+
+            return
+
+        if not visited[source]:
+            visited[source] = True
+            path += str(source)
+
+            for edge in self.graph[source]:
+                self.__multisolver(
+                    edge.neighbour,
+                    desination,
+                    visited,
+                    path,
+                    weight + edge.weight,
+                    criteria,
+                    k,
+                )
+
+            visited[source] = False
+
 
 if __name__ == "__main__":
     g = Graph(
