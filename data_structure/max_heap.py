@@ -2,7 +2,7 @@ import pathmagic # noqa
 from data_structure.base_heap import HeapBase
 
 
-class MinHeap(HeapBase):
+class MaxHeap(HeapBase):
 
     def insert(self, data: int):
         if self.is_full():
@@ -52,7 +52,7 @@ class MinHeap(HeapBase):
 
 
 if __name__ == "__main__":
-    min_heap = MinHeap(3)
+    min_heap = MaxHeap(3)
     min_heap.insert(10)
     min_heap.insert(-99)
     min_heap.insert(50)
