@@ -14,12 +14,12 @@ class MinHeap(HeapBase):
 
     def heapify_up(self):
         index = self.size - 1
-        while self.has_parent(index) and self.parent(index) > self.storage[index]:
+        while self.has_parent(index) and self.parent(index) < self.storage[index]:
             parent_index = self.get_parent_index(index)
             self.swap(parent_index, index)
             index = parent_index
 
-    def remove_min(self):
+    def remove_max(self):
         if self.size == 0:
             raise Exception("Heap is empty")
 
@@ -33,19 +33,19 @@ class MinHeap(HeapBase):
         index = 0
 
         while self.has_left_child(index):
-            smaller_child_index = (
+            larger_child_index = (
                 self.get_left_child_index(index)
-                if self.left_child(index) < self.right_child(index)
+                if self.left_child(index) > self.right_child(index)
                 else self.get_right_child_index(index)
             )
 
-            if self.storage[smaller_child_index] < self.storage[index]:
-                self.swap(smaller_child_index, index)
-                index = smaller_child_index
+            if self.storage[larger_child_index] > self.storage[index]:
+                self.swap(larger_child_index, index)
+                index = larger_child_index
             else:
                 break
 
-    def get_min(self):
+    def get_max(self):
         if self.size == 0:
             raise Exception("Heap is empty")
         return self.storage[0]
@@ -56,8 +56,9 @@ if __name__ == "__main__":
     min_heap.insert(10)
     min_heap.insert(-99)
     min_heap.insert(50)
-    print(min_heap.get_min())
-    print(min_heap.remove_min())
-    print(min_heap.remove_min())
+    print(min_heap.get_max())
+    print(min_heap.remove_max())
+    print(min_heap.remove_max())
     min_heap.insert(0)
-    print(min_heap.remove_min())
+    print(min_heap.remove_max())
+    print(min_heap.get_max())
