@@ -1,4 +1,4 @@
-import pathmagic # noqa
+import pathmagic  # noqa
 from data_structure.min_heap import MinHeap
 
 
