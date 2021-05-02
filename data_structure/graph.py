@@ -82,9 +82,9 @@ class Graph:
     longest_path_weight = float("-inf")
 
     just_larger_path = None
-    just_larger_path_weight = float('inf')
+    just_larger_path_weight = float("inf")
     just_smaller_path = None
-    just_smaller_path_weight = float('-inf')
+    just_smaller_path_weight = float("-inf")
 
     def __multisolver(
         self,
@@ -134,50 +134,43 @@ class Graph:
 
             visited[source] = False
 
-    def get_connected_graphs(self):
+    def get_connected_components(self):
         visited = [False] * len(self.graph)
         paths = []
         for idx, value in enumerate(visited):
             if not value:
                 path = []
-                self.__get_connected_graphs(idx, visited, path)
+                self.__get_connected_components(idx, visited, path)
                 paths.append(path)
         return paths
 
-    def __get_connected_graphs(self, source: int, visited: list, path: list):
-        if visited[source]:
-            return
+    def __get_connected_components(self, source: int, visited: list, path: list):
+        path.append(source)
+        visited[source] = True
 
-        if not visited[source]:
-            path.append(source)
-            visited[source] = True
+        for edge in self.graph[source]:
+            if not visited[edge.neighbour]:
+                self.__get_connected_components(edge.neighbour, visited, path)
 
-            for edge in self.graph[source]:
-                self.__get_connected_graphs(edge.neighbour, visited, path)
+    def is_connected(self):
+        return len(self.get_connected_components()) == 1
 
 
 if __name__ == "__main__":
-    # g = Graph(
-    #     [
-    #         [0, 1, 10],
-    #         [1, 2, 10],
-    #         [2, 3, 10],
-    #         [0, 3, 10],
-    #         [3, 4, 10],
-    #         [4, 5, 10],
-    #         [5, 6, 10],
-    #         [4, 6, 10],
-    #     ]
-    # )
-    # g.allPath(0, 6)
     g = Graph(
         [
             [0, 1, 10],
+            [1, 2, 10],
             [2, 3, 10],
+            [0, 3, 10],
+            [3, 4, 10],
             [4, 5, 10],
             [5, 6, 10],
-            [4, 6, 10]
+            [4, 6, 10],
         ],
-        7
+        7,
     )
-    print(g.get_connected_graphs())
+    # g.allPath(0, 6)
+    # g = Graph([[0, 1, 10], [2, 3, 10], [4, 5, 10], [5, 6, 10], [4, 6, 10]], 7)
+    print(g.get_connected_components())
+    print(g.is_connected())
