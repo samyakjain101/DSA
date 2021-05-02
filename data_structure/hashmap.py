@@ -6,10 +6,9 @@ class Node:
 
 
 class HashMap:
-
     def __init__(self):
         self.__size = 4
-        self.__storage = [None]*self.__size
+        self.__storage = [None] * self.__size
 
     def hash_function(self, key):
         return hash(key) % self.__size

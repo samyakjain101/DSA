@@ -6,7 +6,7 @@ class Edge:
 
 
 class Graph:
-    def __init__(self, graph_array):
+    def __init__(self, graph_array: list, vertices: int):
         """Takes in 2-D array
 
         example-
@@ -15,12 +15,12 @@ class Graph:
         and greater than or equal to zero.
 
         """
-        self.build_graph(graph_array)
+        self.build_graph(graph_array, vertices)
 
     graph = None
 
-    def build_graph(self, graph_array: list):
-        graph = [[] for _ in range(len(graph_array))]
+    def build_graph(self, graph_array: list, vertices: int):
+        graph = [[] for _ in range(vertices)]
 
         for edge in graph_array:
             vertex1: int = edge[0]
@@ -134,18 +134,50 @@ class Graph:
 
             visited[source] = False
 
+    def get_connected_graphs(self):
+        visited = [False] * len(self.graph)
+        paths = []
+        for idx, value in enumerate(visited):
+            if not value:
+                path = []
+                self.__get_connected_graphs(idx, visited, path)
+                paths.append(path)
+        return paths
+
+    def __get_connected_graphs(self, source: int, visited: list, path: list):
+        if visited[source]:
+            return
+
+        if not visited[source]:
+            path.append(source)
+            visited[source] = True
+
+            for edge in self.graph[source]:
+                self.__get_connected_graphs(edge.neighbour, visited, path)
+
 
 if __name__ == "__main__":
+    # g = Graph(
+    #     [
+    #         [0, 1, 10],
+    #         [1, 2, 10],
+    #         [2, 3, 10],
+    #         [0, 3, 10],
+    #         [3, 4, 10],
+    #         [4, 5, 10],
+    #         [5, 6, 10],
+    #         [4, 6, 10],
+    #     ]
+    # )
+    # g.allPath(0, 6)
     g = Graph(
         [
             [0, 1, 10],
-            [1, 2, 10],
             [2, 3, 10],
-            [0, 3, 10],
-            [3, 4, 10],
             [4, 5, 10],
             [5, 6, 10],
-            [4, 6, 10],
-        ]
+            [4, 6, 10]
+        ],
+        7
     )
-    g.allPath(0, 6)
+    print(g.get_connected_graphs())
